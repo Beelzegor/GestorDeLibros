@@ -91,3 +91,78 @@ module.exports = {
   crearLibro,
   actualizarLibro,
 };
+
+// Listar todos los libros (con filtros opcionales por género o estado)
+const listarLibros = async (req, res) => {
+  try {
+    const { genero, estadoLectura } = req.query;
+    const filtro = {};
+
+    if (genero) filtro.genero = genero;
+    if (estadoLectura) filtro.estadoLectura = estadoLectura;
+
+    const libros = await Libro.find(filtro);
+    res.status(200).json(libros);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener los libros', error: error.message });
+  }
+};
+
+// Obtener un libro por ID
+const obtenerLibroPorId = async (req, res) => {
+  try {
+    const libro = await Libro.findById(req.params.id);
+
+    if (!libro) {
+      return res.status(404).json({ mensaje: 'Libro no encontrado' });
+    }
+
+    res.status(200).json(libro);
+  } catch (error) {
+    // Si el ID no tiene formato válido de Mongo, también cae aquí
+    res.status(400).json({ mensaje: 'ID inválido', error: error.message });
+  }
+};
+
+// Eliminar un libro
+const eliminarLibro = async (req, res) => {
+  try {
+    const libro = await Libro.findByIdAndDelete(req.params.id);
+
+    if (!libro) {
+      return res.status(404).json({ mensaje: 'Libro no encontrado' });
+    }
+
+    res.status(200).json({ mensaje: 'Libro eliminado correctamente' });
+  } catch (error) {
+    res.status(400).json({ mensaje: 'ID inválido', error: error.message });
+  }
+};
+
+module.exports.listarLibros = listarLibros;
+module.exports.obtenerLibroPorId = obtenerLibroPorId;
+module.exports.eliminarLibro = eliminarLibro;
+
+// Estadísticas: cantidad de libros por estado + calificación promedio
+const obtenerEstadisticas = async (req, res) => {
+  try {
+    const total = await Libro.countDocuments();
+    const porEstado = await Libro.aggregate([
+      { $group: { _id: '$estadoLectura', cantidad: { $sum: 1 } } }
+    ]);
+    const promedioCalificacion = await Libro.aggregate([
+      { $match: { calificacion: { $ne: null } } },
+      { $group: { _id: null, promedio: { $avg: '$calificacion' } } }
+    ]);
+
+    res.status(200).json({
+      totalLibros: total,
+      porEstado,
+      promedioCalificacion: promedioCalificacion[0]?.promedio || 0,
+    });
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener estadísticas', error: error.message });
+  }
+};
+
+module.exports.obtenerEstadisticas = obtenerEstadisticas; // o agrégalo al objeto module.exports

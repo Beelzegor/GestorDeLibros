@@ -20,3 +20,16 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+// Middleware para rutas no encontradas
+app.use((req, res) => {
+  res.status(404).json({ mensaje: 'Ruta no encontrada' });
+});
+
+// Middleware centralizado de manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    mensaje: err.message || 'Error interno del servidor',
+  });
+});
