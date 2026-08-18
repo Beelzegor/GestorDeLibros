@@ -10,12 +10,15 @@ const {
 
 const router = express.Router();
 
+router.get('/estadisticas/resumen', obtenerEstadisticas); 
+
+// Rutas base
 router.get('/', listarLibros);
-router.get('/:id', obtenerLibroPorId);
 router.post('/', crearLibro);
+
+router.get('/:id', obtenerLibroPorId);
 router.put('/:id', actualizarLibro);
 router.patch('/:id', actualizarLibro);
 router.delete('/:id', eliminarLibro);
-router.get('/estadisticas/resumen', obtenerEstadisticas);
 
 module.exports = router;
