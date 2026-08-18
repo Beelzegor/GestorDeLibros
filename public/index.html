@@ -4,17 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestor de Libros</title>
+  
   <link rel="stylesheet" href="styles.css">
+  
 </head>
 <body>
 
   <div class="app-layout">
     
     <header class="app-header">
-      <div class="header-title">
+     <div class="header-title">
+      <span class="header-emoji">📚</span>
         <h1>Gestor de libros</h1>
-        <span class="badge">Sistema de Inventario</span>
-      </div>
+     </div>
       <button id="btn-open-modal" class="btn-primary">+ Nuevo libro</button>
     </header>
 
@@ -49,8 +51,8 @@
   <dialog id="book-modal">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <h2>Registrar Libro</h2>
-        <p>Introduce la información completa para actualizar el catálogo.</p>
+        <h2 id="modal-title">Registrar Libro</h2>
+        <p id="modal-subtitle">Introduce la información completa para actualizar el catálogo.</p>
       </div>
 
       <form id="book-form">
@@ -73,9 +75,9 @@
           <div class="form-group">
             <label for="status">Estado de lectura</label>
             <select id="status">
-              <option value="Pendiente">Pendiente</option>
-              <option value="Leyendo">Leyendo</option>
-              <option value="Completado">Completado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="leyendo">Leyendo</option>
+              <option value="terminado">Completado</option>
             </select>
           </div>
         </div>
@@ -87,7 +89,7 @@
 
         <div class="modal-footer">
           <button type="button" id="btn-close-modal" class="btn-secondary">Cancelar</button>
-          <button type="submit" class="btn-primary">Guardar registro</button>
+          <button type="submit" id="btn-submit-form" class="btn-primary">Guardar registro</button>
         </div>
       </form>
     </div>
