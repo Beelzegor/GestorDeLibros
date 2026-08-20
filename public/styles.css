@@ -83,7 +83,6 @@ body {
   letter-spacing: -0.03em;
 }
 
-/* Botones Premium con degradado marrón moderno */
 .btn-primary {
   background:linear-gradient(135deg, #a47551 0%, #835737 100%);;
   color: white;
@@ -119,7 +118,6 @@ body {
   border-color: rgba(41, 35, 31, 0.15);
 }
 
-/* Barra de herramientas / Búsqueda */
 .toolbar {
   display: flex;
   gap: 16px;
@@ -162,7 +160,6 @@ input:focus, select:focus {
   border: 1px dashed var(--border-color);
 }
 
-/* Mensajes de estado flotantes o dinámicos */
 .status-hidden {
   display: none;
 }
@@ -197,7 +194,6 @@ input:focus, select:focus {
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Grid Editorial Dinámico*/
 .content-area {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -219,7 +215,6 @@ input:focus, select:focus {
   overflow: hidden;
 }
 
-/* Microanimación y efecto hover elevado estilo galería */
 .book-card::before {
   content: '';
   position: absolute;
@@ -301,7 +296,6 @@ input:focus, select:focus {
   border-color: rgba(239, 68, 68, 0.35);
 }
 
-/* Badges de estado de lectura inmersivos */
 .badge-pendiente,
 .badge-leyendo,
 .badge-terminado {
@@ -331,7 +325,6 @@ input:focus, select:focus {
   border: 1px solid rgba(41, 35, 31, 0.15);
 }
 
-/* Modal Premium */
 dialog {
   border: none;
   background: transparent;

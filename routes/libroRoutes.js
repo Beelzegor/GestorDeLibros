@@ -10,9 +10,8 @@ const {
 
 const router = express.Router();
 
-router.get('/estadisticas/resumen', obtenerEstadisticas); 
+router.get('/estadisticas/resumen', obtenerEstadisticas);
 
-// Rutas base
 router.get('/', listarLibros);
 router.post('/', crearLibro);
 

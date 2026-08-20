@@ -92,7 +92,6 @@ module.exports = {
   actualizarLibro,
 };
 
-// Listar todos los libros (con filtros opcionales por género o estado)
 const listarLibros = async (req, res) => {
   try {
     const { genero, estadoLectura } = req.query;
@@ -108,7 +107,6 @@ const listarLibros = async (req, res) => {
   }
 };
 
-// Obtener un libro por ID
 const obtenerLibroPorId = async (req, res) => {
   try {
     const libro = await Libro.findById(req.params.id);
@@ -119,12 +117,10 @@ const obtenerLibroPorId = async (req, res) => {
 
     res.status(200).json(libro);
   } catch (error) {
-    // Si el ID no tiene formato válido de Mongo, también cae aquí
     res.status(400).json({ mensaje: 'ID inválido', error: error.message });
   }
 };
 
-// Eliminar un libro
 const eliminarLibro = async (req, res) => {
   try {
     const libro = await Libro.findByIdAndDelete(req.params.id);
@@ -143,7 +139,6 @@ module.exports.listarLibros = listarLibros;
 module.exports.obtenerLibroPorId = obtenerLibroPorId;
 module.exports.eliminarLibro = eliminarLibro;
 
-// Estadísticas: cantidad de libros por estado + calificación promedio
 const obtenerEstadisticas = async (req, res) => {
   try {
     const total = await Libro.countDocuments();
@@ -165,4 +160,4 @@ const obtenerEstadisticas = async (req, res) => {
   }
 };
 
-module.exports.obtenerEstadisticas = obtenerEstadisticas; // o agrégalo al objeto module.exports
+module.exports.obtenerEstadisticas = obtenerEstadisticas;

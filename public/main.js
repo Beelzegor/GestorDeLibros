@@ -1,5 +1,3 @@
-//frontend integration & customer logic
-
 const API_URL = '/api/libros';
 
 document.addEventListener('DOMContentLoaded', () => {
